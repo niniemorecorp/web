@@ -193,7 +193,7 @@
             <!-- TAB 1: DASHBOARD RINGKASAN & ANALYTICS (Parity with Jetpack Compose) -->
             <div id="tab-analytics" class="block space-y-6">
                 <!-- Greeting Header Segment -->
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-4">
                     <div>
                         <div class="flex items-center space-x-2">
                             <h2 class="text-xl md:text-2xl font-black text-slate-800 dark:text-white" id="dashboard-greeting">Halo, owner</h2>
@@ -201,11 +201,17 @@
                         </div>
                         <p class="text-xs text-slate-500 dark:text-darkSecondary mt-0.5 font-semibold">Niniemore Corp - Inspired by Your Confidence</p>
                     </div>
-                    <!-- Android Segmented Pill Switch filters -->
-                    <div class="flex items-center bg-slate-200/60 dark:bg-darkSurface border border-slate-300/40 dark:border-slate-800 p-1 rounded-xl text-xs select-none">
-                        <button onclick="setGlobalTimeFilter('Hari Ini')" id="filter-time-day" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">Hari Ini</button>
-                        <button onclick="setGlobalTimeFilter('7 Hari')" id="filter-time-week" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">7 Hari</button>
-                        <button onclick="setGlobalTimeFilter('Semua')" id="filter-time-all" class="px-3.5 py-1.5 text-white bg-indigo-600 dark:bg-[#10B981] font-bold rounded-lg shadow-sm transition">30 Hari</button>
+                    <!-- Controls: Button & Android Segmented Pill Switch filters -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="openAddReceiptModal()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center space-x-1.5 transition shadow-md">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            <span>Buat Resi</span>
+                        </button>
+                        <div class="flex items-center bg-slate-200/60 dark:bg-darkSurface border border-slate-300/40 dark:border-slate-800 p-1 rounded-xl text-xs select-none">
+                            <button onclick="setGlobalTimeFilter('Hari Ini')" id="filter-time-day" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">Hari Ini</button>
+                            <button onclick="setGlobalTimeFilter('7 Hari')" id="filter-time-week" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">7 Hari</button>
+                            <button onclick="setGlobalTimeFilter('Semua')" id="filter-time-all" class="px-3.5 py-1.5 text-white bg-indigo-600 dark:bg-[#10B981] font-bold rounded-lg shadow-sm transition">30 Hari</button>
+                        </div>
                     </div>
                 </div>
 
