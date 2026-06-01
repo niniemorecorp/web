@@ -1,0 +1,6 @@
+{
+  "name": "Niniemore Corp",
+  "description": "Aplikasi pelacakan, pembuatan resi usaha, sinkronisasi Google Sheets, cetak struk, dan dashboard analitik omzet.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

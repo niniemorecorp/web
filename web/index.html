@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niniemore Corp - Inspired by Your Confidence</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Html5-Qrcode CDN -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        lightBg: '#F8FAFC',
+                        lightSurface: '#FFFFFF',
+                        lightPrimary: '#1A56DB',
+                        darkBg: '#1C1B1F',
+                        darkSurface: '#2B2930',
+                        darkPrimary: '#D0BCFF',
+                        darkOnPrimary: '#381E72',
+                        darkOnSurface: '#E6E1E5',
+                        darkSecondary: '#CAC4D0'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.35s ease, color 0.35s ease; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        /* Print layout adjustments */
+        @media print {
+            body { background: white !important; color: black !important; }
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            .print-card { box-shadow: none !important; border: 1px solid #e5e7eb !important; background: white !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen custom-scrollbar selection:bg-indigo-500 selection:text-white">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-5 right-5 z-50 flex items-center p-4 space-x-3 max-w-md bg-slate-800 border-l-4 border-indigo-500 rounded-lg shadow-2xl transition-all duration-300 transform translate-x-full opacity-0 pointer-events-none no-print">
+        <div class="text-indigo-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div class="flex-1 text-sm font-semibold text-slate-200" id="toast-message">Notifikasi baru sukses!</div>
+        <button onclick="hideToast()" class="text-slate-400 hover:text-slate-200">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+    </div>
+
+    <!-- 1. LOGIN SCREEN -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center relative p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 no-print">
+        <!-- Floating Toggle Dark Mode inside Login -->
+        <button onclick="toggleDarkMode()" class="absolute top-6 right-6 p-3 bg-slate-800/80 border border-slate-700/50 hover:bg-slate-700 rounded-full transition shadow-xl">
+            <svg id="theme-icon-login" class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path class="dark:block hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path><path class="dark:hidden block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+
+        <div class="w-full max-w-md bg-slate-900/90 dark:bg-slate-900/90 border border-slate-800/60 rounded-3xl p-8 backdrop-blur-md shadow-2xl transition duration-300">
+            <!-- Branding Header -->
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-indigo-500/20 mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </div>
+                <h2 class="text-2xl font-extrabold text-white tracking-tight">Niniemore Corp</h2>
+                <p class="text-sm text-slate-400 mt-2">Inspired by Your Confidence</p>
+            </div>
+
+            <!-- Login Error Toast -->
+            <div id="login-error-banner" class="hidden mb-4 p-4 bg-red-950/80 border border-red-500/30 text-red-400 text-xs font-semibold rounded-xl flex items-center space-x-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                <span id="login-error-text">Kombinasi sandi salah!</span>
+            </div>
+
+            <!-- Form -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Username / ID Karyawan</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </span>
+                        <input id="login-username" type="text" placeholder="Masukkan username Anda" class="w-full pl-10 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none text-white placeholder-slate-500 text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Password</label>
+                        <button onclick="openResetDialog()" class="text-xs font-bold text-indigo-400 hover:text-indigo-300">Lupa Password?</button>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </span>
+                        <input id="login-password" type="password" placeholder="Masukkan password Anda" class="w-full pl-10 pr-10 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none text-white placeholder-slate-500 text-sm">
+                        <button onclick="togglePasswordVisibility('login-password')" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="handleManualLogin()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold rounded-xl transition duration-150 transform hover:scale-[1.01] shadow-lg shadow-indigo-600/10 text-sm">Masuk</button>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- 2. APP DASHBOARD SCREEN -->
+    <div id="app-dashboard" class="hidden min-h-screen bg-lightBg dark:bg-darkBg text-[#0F172A] dark:text-darkOnSurface flex flex-col md:flex-row print:bg-white print:text-black">
+        
+        <!-- Sidebar Navigation Panel (Responsive) -->
+        <aside class="w-full md:w-64 bg-white dark:bg-darkSurface border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 p-5 flex flex-col flex-shrink-0 no-print">
+            <div class="flex items-center justify-between md:mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-indigo-600 dark:bg-indigo-600 rounded-xl flex items-center justify-center shadow-md shadow-indigo-600/25">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-md font-extrabold text-[#0F172A] dark:text-white tracking-wider">Niniemore</h1>
+                        <p class="text-[10px] text-indigo-600 dark:text-darkPrimary font-black uppercase tracking-widest leading-none">Inspired by Your Confidence</p>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Toggle Button inside Dashboard -->
+                <button onclick="toggleDarkMode()" class="p-2.5 bg-slate-100 dark:bg-[#1C1B1F] hover:bg-slate-200 dark:hover:bg-[#2B2930] text-amber-500 rounded-xl border border-slate-200 dark:border-slate-800 transition">
+                    <svg id="theme-icon-dashboard" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path class="dark:block hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-11.314l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path><path class="dark:hidden block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+            </div>
+
+            <!-- Current User Badge Info -->
+            <div class="mt-4 p-4 bg-slate-50 dark:bg-[#1C1B1F] border border-slate-200 dark:border-slate-800 rounded-2xl flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-indigo-500/10 dark:bg-indigo-505/20 text-indigo-600 dark:text-darkPrimary flex items-center justify-center font-bold text-lg border border-indigo-500/10" id="user-avatar-initial">O</div>
+                <div class="overflow-hidden flex-1">
+                    <p class="text-xs font-bold text-slate-800 dark:text-slate-200 truncate" id="user-name-display">Active User</p>
+                    <span class="inline-block mt-1 px-2.5 py-0.5 text-[8px] font-extrabold uppercase bg-indigo-500/10 dark:bg-darkOnPrimary border border-indigo-500/20 dark:border-darkPrimary/30 text-indigo-600 dark:text-darkPrimary tracking-wider rounded-full" id="user-role-display">OWNER</span>
+                </div>
+            </div>
+
+            <!-- Nav Options -->
+            <nav class="space-y-1.5 flex-1 select-none">
+                <!-- Tab 1: Dashboard & Analytics -->
+                <button onclick="switchTab('tab-analytics')" id="btn-tab-analytics" class="w-full flex items-center space-x-3 px-4 py-3 bg-indigo-600 dark:bg-darkPrimary text-white dark:text-[#381E72] font-extrabold rounded-xl text-sm transition text-left">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    <span>Dashboard Ringkasan</span>
+                </button>
+                <!-- Tab 2: daftar Transaksi -->
+                <button onclick="switchTab('tab-receipts')" id="btn-tab-receipts" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-darkSecondary hover:text-indigo-650 dark:hover:text-white rounded-xl text-sm transition text-left">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    <span>Daftar Transaksi</span>
+                </button>
+                <!-- Tab 3: Cek Resi Logistik Tracker (New tab page matching app) -->
+                <button onclick="switchTab('tab-tracking')" id="btn-tab-tracking" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-darkSecondary hover:text-indigo-650 dark:hover:text-white rounded-xl text-sm transition text-left">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                    <span>Cek Resi & Tracking</span>
+                </button>
+                <!-- Tab 4: Sync Configurations Settings -->
+                <button onclick="switchTab('tab-sync')" id="btn-tab-sync" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-darkSecondary hover:text-indigo-650 dark:hover:text-white rounded-xl text-sm transition text-left">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l2.828 2.829a9 9 0 10-12.728 0l2.828-2.829z"></path></svg>
+                    <span>Google Sheets Sync</span>
+                </button>
+                <!-- Interactive Action Simulator Button -->
+                <button onclick="triggerHourlySimulation()" class="w-full flex items-center space-x-3 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800/50 text-emerald-600 dark:text-[#34D399] rounded-xl text-sm transition text-left">
+                    <svg class="w-5 h-5 flex-shrink-0 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span>Simpan & Simulasi Sync</span>
+                </button>
+            </nav>
+
+            <button onclick="handleLogout()" class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800 text-sm font-bold text-red-500 hover:text-red-400 flex items-center space-x-3 px-4 py-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                <span>Keluar Portal</span>
+            </button>
+        </aside>
+
+        <!-- Main Dashboard View Container -->
+        <main class="flex-1 flex flex-col min-h-0 overflow-y-auto custom-scrollbar bg-lightBg dark:bg-darkBg text-slate-800 dark:text-darkOnSurface p-6 print:p-0">
+            
+            <!-- TAB 1: DASHBOARD RINGKASAN & ANALYTICS (Parity with Jetpack Compose) -->
+            <div id="tab-analytics" class="block space-y-6">
+                <!-- Greeting Header Segment -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h2 class="text-xl md:text-2xl font-black text-slate-800 dark:text-white" id="dashboard-greeting">Halo, owner</h2>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-darkSecondary mt-0.5 font-semibold">Niniemore Corp - Inspired by Your Confidence</p>
+                    </div>
+                    <!-- Android Segmented Pill Switch filters -->
+                    <div class="flex items-center bg-slate-200/60 dark:bg-darkSurface border border-slate-300/40 dark:border-slate-800 p-1 rounded-xl text-xs select-none">
+                        <button onclick="setGlobalTimeFilter('Hari Ini')" id="filter-time-day" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">Hari Ini</button>
+                        <button onclick="setGlobalTimeFilter('7 Hari')" id="filter-time-week" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">7 Hari</button>
+                        <button onclick="setGlobalTimeFilter('Semua')" id="filter-time-all" class="px-3.5 py-1.5 text-white bg-indigo-600 dark:bg-[#10B981] font-bold rounded-lg shadow-sm transition">30 Hari</button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Widget Stats -->
+                <div id="dashboard-widgets" class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6 no-print">
+                    <!-- Cards 1: PENDAPATAN (Warm Green theme) -->
+                    <div class="p-4 rounded-3xl flex flex-col justify-between h-[125px] transition shadow-md bg-[#E6F4EA] dark:bg-[#132A1F] text-[#114D32] dark:text-[#34D399]">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-[#2C6B56] dark:text-[#A6E3BF]">Pendapatan</p>
+                            <button onclick="toggleRevenueSecure()" class="text-xs p-1 bg-white/60 dark:bg-slate-900/40 rounded-lg hover:bg-white/80 dark:hover:bg-slate-900/60 text-[#114D32] dark:text-[#34D399] transition">
+                                <svg id="eye-icon-rev" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </button>
+                        </div>
+                        <p id="stat-revenue" class="text-xl font-black">Rp 0</p>
+                        <span class="text-[9px] font-bold inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/50 dark:bg-slate-900/30 w-max text-xs">
+                            <svg class="w-3 h-3 mr-0.5 text-emerald-600 dark:text-[#34D399]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            Tumbuh +34%
+                        </span>
+                    </div>
+
+                    <!-- Cards 2: DIPROSES (Warm Amber theme) -->
+                    <div class="p-4 rounded-3xl flex flex-col justify-between h-[125px] transition shadow-md bg-[#FFFBEB] dark:bg-[#2D2313] text-[#78350F] dark:text-[#FBBF24]">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-[#B45309] dark:text-[#FCD34D]">Diproses</p>
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        </div>
+                        <p id="stat-processed" class="text-2xl font-black">0</p>
+                        <span class="text-[9px] font-bold inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/50 dark:bg-slate-900/30 w-max text-xs">
+                            <svg class="w-3 h-3 mr-0.5 text-amber-600 dark:text-[#FBBF24]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            Tumbuh +5%
+                        </span>
+                    </div>
+
+                    <!-- Cards 3: TERKIRIM (Warm Blue theme) -->
+                    <div class="p-4 rounded-3xl flex flex-col justify-between h-[125px] transition shadow-md bg-[#EFF6FF] dark:bg-[#172554] text-[#1E3A8A] dark:text-[#60A5FA]">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-[#1E40AF] dark:text-[#93C5FD]">Dikirim</p>
+                            <svg class="w-4 h-4 text-[#1D4ED8] dark:text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9h4l3 5v3h-1m-4-8V5a1 1 0 00-1-1H3a1 1 0 00-1 1v10a1 1 0 001 1h1m11-7a2 2 0 114 0 2 2 0 01-4 0z"></path></svg>
+                        </div>
+                        <p id="stat-sent" class="text-2xl font-black">0</p>
+                        <span class="text-[9px] font-bold inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/50 dark:bg-slate-900/30 w-max text-xs">
+                            <svg class="w-3 h-3 mr-0.5 text-blue-600 dark:text-[#60A5FA]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            Tumbuh +10%
+                        </span>
+                    </div>
+
+                    <!-- Cards 4: DITERIMA (Teal theme) -->
+                    <div class="p-4 rounded-3xl flex flex-col justify-between h-[125px] transition shadow-md bg-[#F0FDFA] dark:bg-[#042F2E] text-[#115E59] dark:text-[#2DD4BF]">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-[#0F766E] dark:text-[#99F6E4]">Diterima</p>
+                            <svg class="w-4 h-4 text-[#0D9488]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <p id="stat-received" class="text-2xl font-black">0</p>
+                        <span class="text-[9px] font-bold inline-flex items-center px-1.5 py-0.5 rounded-full bg-white/50 dark:bg-slate-900/30 w-max text-xs">
+                            <svg class="w-3 h-3 mr-0.5 text-teal-600 dark:text-[#2DD4BF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            Tumbuh +8%
+                        </span>
+                    </div>
+
+                    <!-- Cards 5: TOTAL DATA (Neutral grey theme) -->
+                    <div class="p-4 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-darkSurface flex flex-col justify-between h-[125px] transition shadow-md text-[#0F172A] dark:text-[#E6E1E5]">
+                        <div class="flex items-center justify-between">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-darkSecondary">Total Resi</p>
+                            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <p id="stat-transactions" class="text-2xl font-[#0F172A] dark:font-white font-black">0</p>
+                        <span class="text-[9px] text-slate-400 font-semibold block mt-1 tracking-tight">Aktif dalam memori</span>
+                    </div>
+                </div>
+
+                <!-- GRAPHING / VISUALS MODULE -->
+                <div id="chart-panel" class="bg-white dark:bg-darkSurface border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col no-print">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
+                        <div>
+                            <h2 class="text-sm font-extrabold text-slate-800 dark:text-slate-100">Trend Penjualan</h2>
+                            <p class="text-xs text-slate-400 leading-relaxed font-semibold">Performa transaksi</p>
+                        </div>
+                        <!-- Time Filters -->
+                        <div class="flex space-x-1 bg-slate-100 dark:bg-[#1C1B1F] p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                            <button onclick="setChartFilter('Week')" id="filter-day" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">Week</button>
+                            <button onclick="setChartFilter('Month')" id="filter-week" class="px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition">Month</button>
+                            <button onclick="setChartFilter('Years')" id="filter-all" class="px-3.5 py-1.5 text-[#381E72] dark:text-[#381E72] bg-[#D0BCFF] font-black rounded-lg shadow-sm">Years</button>
+                        </div>
+                    </div>
+                    <div class="h-56 relative w-full flex items-center justify-center">
+                        <canvas id="analyticsChart" class="w-full h-full max-h-56"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quick Sheets Sync Card inside Dashboard -->
+                <div class="bg-white dark:bg-darkSurface border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 relative overflow-hidden no-print">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-[#D1FAE5] dark:bg-[#042F2E] text-teal-850 dark:text-teal-400 rounded-xl flex items-center justify-center font-bold">
+                            <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-extrabold text-slate-800 dark:text-slate-100">Integrasi Google Sheets</h3>
+                            <p class="text-xs text-slate-500 dark:text-[#CAC4D0] mt-0.5" id="dashboard-sync-status">Sheets Terhubung (Luring Terproteksi)</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="triggerFullCloudSync()" class="px-4 py-2 bg-indigo-600 dark:bg-emerald-600 hover:bg-indigo-500 dark:hover:bg-emerald-500 text-white font-extrabold rounded-xl text-xs transition shadow flex items-center space-x-1.5 z-10">
+                            <!-- Loading indicator spinner -->
+                            <svg class="w-3.5 h-3.5 animate-spin hidden" id="spin-sync-indicator" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <span id="label-sync-indicator">Sinkronisasikan</span>
+                        </button>
+                        <button onclick="switchTab('tab-sync')" class="px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-350 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl text-xs transition z-10">Konfigurasi</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRIMARY APP TAB: RECEIPTS LIST -->
+            <div id="tab-receipts" class="block space-y-6">
+                <!-- Inner Panel Table header controls -->
+                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl shadow-xl overflow-hidden flex flex-col no-print">
+                    <!-- Control Bar controls -->
+                    <div class="p-5 border-b border-slate-800/80 space-y-4">
+                        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
+                            <div>
+                                <h3 class="text-base font-extrabold text-white flex items-center">
+                                    Daftar Resi Usaha
+                                    <span id="receipts-count" class="ml-2.5 px-2 py-0.5 text-xs font-bold leading-none bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20">0</span>
+                                </h3>
+                                <p class="text-xs text-slate-450 text-slate-400 mt-1">Cetak, ekspor, dan awasi pengiriman logistik secara komprehensif.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="openScanModal()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs flex items-center space-x-1.5 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    <span>Scan Resi Otomatis</span>
+                                </button>
+                                <button onclick="openAddReceiptModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs flex items-center space-x-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                    <span>Buat Resi Baru</span>
+                                </button>
+                                <button onclick="triggerBulkDelete()" id="btn-bulk-delete" class="px-4.5 py-2.5 bg-red-650 bg-red-650/15 border border-red-500/30 text-red-400 hover:bg-red-600 hover:text-white font-bold rounded-xl text-xs flex items-center space-x-1.5 hidden transition">
+                                    <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M9 3h6"></path></svg>
+                                    <span>Hapus (<span id="delete-count">0</span>)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filter Status Badges Row and Search -->
+                        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between pt-2">
+                            <div class="flex flex-wrap gap-1.5 items-center w-full sm:w-auto">
+                                <button onclick="setStatusFilter('ALL')" id="tab-all" class="px-4 py-2 text-xs font-bold bg-indigo-600 text-white rounded-xl transition">Semua</button>
+                                <button onclick="setStatusFilter('DIPROSES')" id="tab-proses" class="px-4 py-2 text-xs font-semibold hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl transition">Diproses</button>
+                                <button onclick="setStatusFilter('TERKIRIM')" id="tab-kirim" class="px-4 py-2 text-xs font-semibold hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl transition">Terkirim</button>
+                                <button onclick="setStatusFilter('DITERIMA')" id="tab-terima" class="px-4 py-2 text-xs font-semibold hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl transition">Diterima</button>
+                            </div>
+                            <div class="relative w-full sm:w-72">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500 pointer-events-none">
+                                    <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </span>
+                                <input id="receipt-search" onkeyup="handleSearch()" type="text" placeholder="Cari resi, nama, barang, kurir..." class="w-full pl-9 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl focus:border-indigo-500 focus:outline-none text-slate-200 text-xs placeholder-slate-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database Table Grid -->
+                    <div id="table-container" class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-950 text-slate-400 font-bold uppercase tracking-wider text-[10px] border-b border-slate-800/85">
+                                    <th class="py-4 px-4 w-12 text-center">
+                                        <input type="checkbox" id="master-select" onchange="toggleSelectAll(this)" class="w-4 h-4 rounded-md accent-indigo-600 bg-slate-900 border-slate-800">
+                                    </th>
+                                    <th class="py-4 px-4">No. Resi</th>
+                                    <th class="py-4 px-4">Penerima</th>
+                                    <th class="py-4 px-4">Barang</th>
+                                    <th class="py-4 px-4">Kurir</th>
+                                    <th class="py-4 px-4 text-right">Harga</th>
+                                    <th class="py-4 px-4 text-center">Status</th>
+                                    <th class="py-4 px-4 text-center">Synced</th>
+                                    <th class="py-4 px-4 text-center w-24">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receipts-tbody" class="divide-y divide-slate-850 bg-slate-900/60 font-semibold text-slate-300">
+                                <!-- Generated Dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Empty State fallback -->
+                    <div id="empty-state" class="hidden py-16 px-4 text-center flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-slate-950 border border-slate-800 rounded-2xl flex items-center justify-center text-slate-600 mb-4 shadow-inner">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-300">Belum Ada Resi</h4>
+                        <p class="text-xs text-slate-500 mt-1.5 max-w-sm">Semua data resi terhapus atau belum dibuat. Silakan tambahkan resi baru atau reset database.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: CEK RESI LOGISTIK TRACKER (New layout matching the Android App) -->
+            <div id="tab-tracking" class="hidden space-y-6 no-print">
+                <div class="bg-white dark:bg-darkSurface border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm flex flex-col">
+                    <h3 class="text-base font-extrabold text-slate-800 dark:text-white flex items-center">
+                        <svg class="w-5 h-5 text-indigo-500 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        Portal Cek Resi Logistik
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">Lacak pergerakan paket pengiriman kurir fiktif atau non-fiktif dari basis memori secara instan.</p>
+
+                    <div class="mt-6 flex flex-col sm:flex-row gap-3 w-full max-w-2xl">
+                        <!-- Select Carrier option input -->
+                        <div class="sm:w-1/3">
+                            <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1.5">Pilih Jasa Ekspedisi</label>
+                            <select id="tracking-courier-select" class="w-full px-4 py-3 bg-slate-50 dark:bg-[#1C1B1F] border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-550">
+                                <option value="ALL">Semua Kurir</option>
+                                <option value="J&T Express">J&T Express</option>
+                                <option value="Wahana">Wahana</option>
+                                <option value="Indah Cargo">Indah Cargo</option>
+                            </select>
+                        </div>
+                        <!-- Search Tracking No -->
+                        <div class="flex-1">
+                            <label class="block text-[10px] font-bold uppercase text-slate-400 mb-1.5">Nomor Resi Usaha</label>
+                            <div class="relative">
+                                <input id="tracking-search-input" type="text" placeholder="Masukkan nomor resi, misal: RU-987011" class="w-full pl-4 pr-12 py-3 bg-slate-50 dark:bg-[#1C1B1F] border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-indigo-500 font-bold placeholder-slate-400">
+                                <button onclick="handleTrackingSearch()" class="absolute inset-y-1 right-1 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold rounded-lg text-xs transition">
+                                    Cari
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Visual Tracker Output Status panel -->
+                <div id="tracking-result-panel" class="bg-white dark:bg-darkSurface border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm hidden">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 dark:border-slate-850 pb-5 mb-5 gap-4">
+                        <div>
+                            <span class="px-2.5 py-1 text-[10px] font-black rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-darkPrimary border border-indigo-500/20" id="tracker-badge-courier">J&T Express</span>
+                            <h4 class="text-lg font-black text-slate-800 dark:text-white mt-2.5" id="tracker-display-receipt">RU-987011</h4>
+                            <p class="text-xs text-slate-500 dark:text-darkSecondary mt-0.5 font-semibold">Penerima: <span id="tracker-display-recipient" class="font-bold text-slate-800 dark:text-white">Agnes Mo</span></p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="text-right hidden sm:block">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Status Terkini</p>
+                                <p class="text-xs font-bold text-slate-850 dark:text-slate-200" id="tracker-display-meta">Sedang Transit</p>
+                            </div>
+                            <span class="px-4 py-2 rounded-xl text-xs font-black inline-flex items-center bg-blue-500/10 text-blue-500 border border-blue-550/20" id="tracker-display-status">TERKIRIM</span>
+                        </div>
+                    </div>
+
+                    <!-- Left: Details, Right: Timelines -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="md:col-span-1 border-r border-slate-100 dark:border-slate-800 pr-0 md:pr-6 space-y-4 text-xs">
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Informasi Paket</p>
+                                <p class="font-extrabold text-[#0F172A] dark:text-white mt-1" id="tracker-display-item">Pakaian Gamis Batik Peklongan</p>
+                                <p class="text-slate-400 mt-0.5" id="tracker-display-price">Rp 250,000</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Alamat Tujuan</p>
+                                <p class="font-semibold text-slate-600 dark:text-[#CAC4D0] mt-1 leading-relaxed" id="tracker-display-address">Gg. Merdeka No. 45, Coblong, Bandung, Jawa Barat 40135</p>
+                            </div>
+                        </div>
+
+                        <!-- Milestone UI Container -->
+                        <div class="md:col-span-2">
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-4">Milestone Perjalanan Logistik</p>
+                            <div class="relative pl-6 space-y-6 before:absolute before:inset-y-1 before:left-[11px] before:w-0.5 before:bg-slate-200 dark:before:bg-slate-800" id="tracker-milestones-list">
+                                <!-- Computed chronologically with dots dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty state searching -->
+                <div id="tracking-empty-state" class="p-12 border border-dashed border-slate-200 dark:border-slate-800 bg-white/40 dark:bg-darkSurface/40 text-center rounded-2xl flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 bg-slate-50 dark:bg-[#1C1B1F] border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center text-slate-650 dark:text-slate-550 mb-3">
+                        <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xs font-bold text-slate-750 dark:text-slate-300">Belum Ada Pelacakan</h4>
+                    <p class="text-[10px] text-slate-450 dark:text-slate-500 max-w-xs mt-1">Masukkan Nomor Resi diatas atau klik tombol 'Lacak' pada kolom aksi baris tabel Transaksi.</p>
+                </div>
+            </div>
+
+            <!-- SECONDARY APP TAB: GOOGLE SHEETS CLOUD SYNC -->
+            <div id="tab-sync" class="hidden space-y-6 no-print">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col">
+                    <h3 class="text-base font-extrabold text-white flex items-center">
+                        <svg class="w-5 h-5 text-indigo-500 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        Google Sheets Cloud Sync
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">Integrasikan database resi lokal Anda secara real-time ke web spreadsheet eksternal.</p>
+
+                    <div class="mt-6 space-y-4 max-w-xl">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Google Sheets Webhook URL</label>
+                            <input id="sheets-url-input" type="url" placeholder="https://script.google.com/macros/s/AKfycbzboeV5_sPQ8DnJd-uEePUUTp81UEr4jHD-hAUbJDbetTS8H2EINouY0DHxYmlU0Tc0nQ/exec" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+                            <p class="text-[10px] text-slate-500 mt-1.5 leading-relaxed">Masukkan URL Google Apps Script Webhook untuk mengaktifkan sinkronisasi otomatis multi-perangkat. Kosongkan URL untuk mengaktifkan server simulasi lokal demi testing fungsional visual.</p>
+                        </div>
+
+                        <div class="flex items-center space-x-3 pt-2">
+                            <button onclick="saveSheetsUrl()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 font-bold rounded-xl text-xs transition">Simpan Konfigurasi</button>
+                            <button onclick="triggerFullCloudSync()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition flex items-center space-x-1.5">
+                                <span id="sync-spinner" class="hidden w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                                <span>Sinkronisasikan Sekarang</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Progress state simulator details card -->
+                    <div id="sync-status-card" class="mt-6 p-4 rounded-xl border border-slate-800 bg-slate-950/30 flex items-center space-x-4 hidden">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-indigo-500/10 text-indigo-400" id="sync-status-icon">
+                            <!-- SVG Status Icons computed dynamically -->
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-200" id="sync-status-title">Proses Syncing...</p>
+                            <p class="text-[10px] text-slate-500 mt-1" id="sync-status-description">Menghubungkan ke infrastruktur cloud server Google...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- 2.5 MODAL: SCAN RESI OTOMATIS -->
+    <div id="scan-receipt-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden no-print">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full overflow-hidden shadow-2xl transition-all duration-300">
+            <!-- Header -->
+            <div class="p-5 border-b border-slate-800/80 flex justify-between items-center bg-slate-950/50">
+                <h3 class="text-sm font-extrabold text-white flex items-center">
+                    <svg class="w-5 h-5 text-emerald-500 mr-2 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Scan Resi Otomatis
+                </h3>
+                <button onclick="closeScanModal()" class="text-slate-500 hover:text-slate-300 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-6 space-y-5">
+                <!-- Status/Feedback message -->
+                <div id="scan-feedback" class="bg-emerald-950/5 p-3.5 rounded-xl text-xs text-emerald-400 border border-emerald-555 border-emerald-500/10">
+                    Arahkan kamera ke barcode/QR Code resi, atau isi testing form di bawah.
+                </div>
+
+                <!-- Camera frame with active scanning overlay laser -->
+                <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-video flex items-center justify-center">
+                    <div id="qr-reader" class="w-full h-full"></div>
+                    <!-- Red laser overlay scanner line animation -->
+                    <div id="laser-line" class="absolute left-0 right-0 top-1/2 h-[2px] bg-red-500 shadow-[0_0_8px_#f43f5e] z-10 animate-pulse"></div>
+                </div>
+
+                <!-- TEST INDEPENDENT INPUT PRE-VIEW FOR EMULATORS / DEV MACHINES -->
+                <div class="bg-slate-950/40 border border-slate-800 p-4 rounded-2xl space-y-2">
+                    <span class="block text-[10px] font-extrabold text-emerald-500 tracking-wider uppercase">VIRTUAL SIMULATOR TESTING</span>
+                    <p class="text-[10px] text-slate-500 leading-relaxed">Mensimulasikan input barcode/QR secara instan untuk tujuan pengetesan:</p>
+                    <div class="flex gap-2">
+                        <input id="input-mock-barcode" type="text" placeholder="Ketik resi (cth: JX1234, W102581, IND2093)" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-300 focus:outline-none focus:border-emerald-500">
+                        <button onclick="simulateWebcamScan()" class="px-3 py-2 bg-emerald-600/20 border border-emerald-500/35 hover:bg-emerald-600 hover:text-white text-emerald-400 text-xs font-bold rounded-xl transition">Simulate</button>
+                    </div>
+                    <div class="text-[9px] text-slate-500 space-y-1 mt-1 font-mono uppercase">
+                        <div>- J&amp;T: JX... atau total 12 digit format angka</div>
+                        <div>- Wahana: kombinasi diawali W... (8-12 karakter)</div>
+                        <div>- Indah Cargo: 3 kode huruf diikuti 7-10 digit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 border-t border-slate-800/80 bg-slate-950/50 flex space-x-2.5 justify-end">
+                <button onclick="closeScanModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-xs transition">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. MODAL: TAMBAH RESI PARCEL -->
+    <div id="add-receipt-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden no-print">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl transition-all duration-300">
+            <div class="p-5 border-b border-slate-800/80 flex justify-between items-center bg-slate-950/50">
+                <h3 class="text-sm font-extrabold text-white flex items-center">
+                    <svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Buat Data Resi Usaha
+                </h3>
+                <button onclick="closeAddReceiptModal()" class="text-slate-500 hover:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto custom-scrollbar">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Nomor Resi (Optional)</label>
+                        <input id="input-no-resi" type="text" placeholder="Contoh: RU-102581" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Nama Penerima</label>
+                        <input id="input-penerima" type="text" placeholder="Nama Lengkap" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Telepon Penerima</label>
+                        <input id="input-telepon" type="tel" placeholder="Contoh: 0812xxxxxx" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Jasa Kurir Logistik</label>
+                        <select id="input-kurir" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                            <option value="J&T Express">J&T Express</option>
+                            <option value="Wahana">Wahana</option>
+                            <option value="Indah Cargo">Indah Cargo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Nama Barang / Deskripsi</label>
+                    <input id="input-barang" type="text" placeholder="Contoh: Sepatu Kulit Sneakers Vintage" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Harga Barang (Rp)</label>
+                    <input id="input-harga" type="number" placeholder="Contoh: 250000" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold uppercase text-slate-450 text-slate-400 mb-1">Alamat Pengiriman Lengkap</label>
+                    <textarea id="input-alamat" rows="2" placeholder="Nama Jalan, Blok, Kota, Kode Pos" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
+                </div>
+            </div>
+
+            <div class="p-5 border-t border-slate-800/80 bg-slate-950/50 flex space-x-2.5 justify-end">
+                <button onclick="closeAddReceiptModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-xs transition">Batal</button>
+                <button onclick="submitNewReceipt()" class="px-4.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">Tambahkan Resi</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 4. MODAL: DETIL RESI / TIMELINE MILESTONE -->
+    <div id="detail-receipt-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden custom-scrollbar">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl transition-all duration-300 no-print">
+            <div class="p-5 border-b border-slate-800/80 flex justify-between items-center bg-slate-950/50">
+                <div class="flex items-center space-x-3">
+                    <span id="detail-no-resi" class="text-base font-extrabold text-white font-mono">RU-000000</span>
+                    <span id="detail-badge-status" class="px-2.5 py-0.5 text-[8px] font-extrabold uppercase rounded-full">DIPROSES</span>
+                </div>
+                <button onclick="closeDetailReceiptModal()" class="text-slate-500 hover:text-slate-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
+                <!-- Receipt details panel left -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Penerima</h4>
+                        <p id="detail-penerima-nama" class="text-sm font-bold text-white">-</p>
+                        <p id="detail-penerima-phone" class="text-xs text-indigo-400 font-mono tracking-tight">-</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Alamat Tujuan</h4>
+                        <p id="detail-penerima-alamat" class="text-xs text-slate-300 leading-relaxed">-</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Detail Barang</h4>
+                        <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-850 flex justify-between items-center">
+                            <div>
+                                <p id="detail-barang-nama" class="text-xs font-bold text-slate-200 truncate pr-2">-</p>
+                                <p id="detail-barang-kurir" class="text-[9px] text-slate-400 mt-0.5 uppercase tracking-wider">-</p>
+                            </div>
+                            <p id="detail-barang-harga" class="text-xs font-extrabold text-indigo-400 flex-shrink-0">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions panel to alter status & logs (Owner & Staff available) -->
+                    <div id="detail-actions-panel" class="p-4 bg-slate-950 border border-slate-800 rounded-xl space-y-4 hidden">
+                        <h4 class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Perbarui Status Logistik</h4>
+                        
+                        <!-- Status Advance select -->
+                        <div>
+                            <label class="block text-[9px] font-bold text-slate-500 mb-1">Set Status Transaksi</label>
+                            <select id="detail-update-status" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-200 focus:outline-none">
+                                <option value="DIPROSES">DIPROSES</option>
+                                <option value="TERKIRIM">TERKIRIM</option>
+                                <option value="DITERIMA">DITERIMA</option>
+                            </select>
+                        </div>
+
+                        <!-- Milestone timeline update logs -->
+                        <div class="space-y-2">
+                            <label class="block text-[9px] font-bold text-slate-500">Tambah Catatan Milestones Logistik</label>
+                            <input id="detail-update-comment" type="text" placeholder="Deskripsi log (cth: Paket sampai di Jakarta)" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-200 focus:outline-none placeholder-slate-600">
+                            <input id="detail-update-location" type="text" placeholder="Lokasi (cth: Surabaya Hub)" class="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-slate-200 focus:outline-none placeholder-slate-600 mt-1.5">
+                        </div>
+
+                        <button onclick="submitReceiptUpdate()" class="w-full py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg text-xs transition">Update Status & Milestones</button>
+                    </div>
+                </div>
+
+                <!-- Receipt timeline tracker right -->
+                <div class="space-y-4">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center">
+                        <svg class="w-4 h-4 text-slate-450 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Lini Masa Pengiriman / Milestones
+                    </h4>
+
+                    <!-- Timeline Vertical lines logs stack -->
+                    <div id="detail-timeline-stack" class="relative pl-6 border-l-2 border-slate-800/80 space-y-6 ml-2 text-xs py-1.5">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-5 border-t border-slate-800/80 bg-slate-950/50 flex flex-wrap gap-2 justify-end">
+                <button onclick="printVoucherInvoice()" class="px-4 py-2 bg-slate-850 hover:bg-slate-750 text-slate-200 font-bold rounded-xl text-xs flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    <span>Cetak Invoice</span>
+                </button>
+                <button onclick="exportSingleCSV()" class="px-4 py-2 bg-slate-850 hover:bg-slate-750 text-slate-200 font-bold rounded-xl text-xs flex items-center space-x-1.5 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <span>CSV</span>
+                </button>
+                <button onclick="closeDetailReceiptModal()" class="px-4.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition">Tutup Dialog</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 5. DIALOG POPUP: RESET PASSWORD -->
+    <div id="reset-password-dialog" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden no-print">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-2xl">
+            <div class="flex items-center space-x-3 text-indigo-400 mb-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l8-5.333a2 2 0 012.22 0l8 5.333A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76M12 11h.01"></path></svg>
+                <h3 class="text-sm font-extrabold text-white">Reset Password</h3>
+            </div>
+            
+            <p class="text-xs text-slate-350 text-slate-400 leading-relaxed mb-4">Permintaan reset password akan dikirim ke akun Google konfirmasi kami.</p>
+            <div class="p-3 bg-indigo-950/40 border border-indigo-900/40 rounded-xl space-y-1 mb-4 text-xs font-semibold">
+                <p class="text-[9px] text-indigo-400 font-bold uppercase tracking-wider">Tujuan Konfirmasi:</p>
+                <p class="text-slate-200">niniemorecorp@gmail.com</p>
+                <p class="text-[10px] text-slate-500 font-medium leading-normal mt-2.5">Sistem akan membuka aplikasi email (seperti Gmail atau Mailbox) dengan template pengajuan konfirmasi otomatis.</p>
+            </div>
+
+            <div class="flex space-x-2.5 justify-end">
+                <button onclick="closeResetDialog()" class="px-4 py-2 bg-slate-800 hover:bg-slate-750 text-slate-300 font-bold rounded-xl text-xs transition">Batal</button>
+                <button onclick="submitResetEmail()" class="px-4.5 py-2 bg-indigo-600 hover:bg-indigo-500 font-bold text-white rounded-xl text-xs transition">Kirim Email</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 6. DIALOG POPUP: CHOOSE GOOGLE ACC -> BYPASS ACCESS -->
+    <div id="google-accounts-selector" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm hidden no-print">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full p-6 shadow-2xl relative">
+            <h3 class="text-center text-sm font-extrabold text-indigo-400 tracking-wider mb-3">Informasi Akun Masuk</h3>
+            
+            <div class="text-[11px] text-slate-400 bg-slate-955 p-3 rounded-xl border border-slate-800 mb-4 leading-relaxed text-center">
+                Akses cepat bypass otomatis Google Chooser telah dinonaktifkan demi kepatuhan keamanan. Silakan gunakan kredensial masuk manual berikut:
+            </div>
+
+            <div class="space-y-3">
+                <!-- Ninie Owner Info Card (Non-clickable) -->
+                <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 flex flex-col space-y-1">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <p class="text-xs font-black text-slate-200">(Owner)</p>
+                    </div>
+                    <div class="text-[10px] text-slate-400 font-mono space-y-0.5">
+                        <p>Username: <span class="text-indigo-400 font-extrabold font-sans">ninieowner</span></p>
+                        <p>Password: <span class="text-indigo-400 font-extrabold font-sans">Polkadot5.</span></p>
+                    </div>
+                    <p class="text-[8px] text-slate-500 font-semibold leading-tight pt-1">Akses penuh: Manajemen, Reset Database, Hapus Resi.</p>
+                </div>
+                
+                <!-- Ninie Admin Info Card (Non-clickable) -->
+                <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-800 flex flex-col space-y-1">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+                        <p class="text-xs font-black text-slate-200">(Admin)</p>
+                    </div>
+                    <div class="text-[10px] text-slate-400 font-mono space-y-0.5">
+                        <p>Username: <span class="text-indigo-400 font-extrabold font-sans">admin</span></p>
+                        <p>Password: <span class="text-indigo-400 font-extrabold font-sans">Ninie123</span></p>
+                    </div>
+                    <p class="text-[8px] text-slate-500 font-semibold leading-tight pt-1">Akses Staff: Create, Update Logistik, Tambah Milestones.</p>
+                </div>
+            </div>
+
+            <button onclick="closeGoogleSelector()" class="w-full mt-5 py-2.5 bg-slate-800 hover:bg-slate-750 text-slate-350 font-bold rounded-xl text-xs transition">Tutup</button>
+        </div>
+    </div>
+
+
+    <!-- 7. INVOICE VOUCHER PRINT TEMPLATE VIEW ONLY -->
+    <div id="print-layout-template" class="hidden print-only max-w-xs mx-auto p-4 bg-white text-black text-xs font-mono border border-slate-300 rounded space-y-4 leading-normal">
+        <div class="text-center font-bold">
+            <p class="text-base font-extrabold leading-tight uppercase font-sans">Niniemore Corp</p>
+            <p class="text-[10px] tracking-wide mt-0.5">Inspired by Your Confidence</p>
+            <div class="border-b border-black border-dashed my-2"></div>
+        </div>
+        <div class="space-y-1">
+            <div class="flex justify-between"><span class="font-semibold">No Resi:</span><span id="p-resi-no" class="font-extrabold">-</span></div>
+            <div class="flex justify-between"><span>Tanggal:</span><span id="p-resi-date">-</span></div>
+            <div class="flex justify-between"><span>Status:</span><span id="p-resi-status" class="uppercase font-bold">-</span></div>
+        </div>
+        <div class="border-b border-black border-dashed my-2"></div>
+        <div class="space-y-1">
+            <p class="font-bold underline text-[10px]">PENERIMA EXPEDISI:</p>
+            <p class="text-xs" id="p-resi-penerima-nama">-</p>
+            <p id="p-resi-penerima-phone">-</p>
+            <p class="text-[10px] text-slate-800 leading-normal italic" id="p-resi-penerima-alamat">-</p>
+        </div>
+        <div class="border-b border-black border-dashed my-2"></div>
+        <div class="space-y-1">
+            <p class="font-bold underline text-[10px]">DESKRIPSI:</p>
+            <div class="flex justify-between">
+                <span id="p-resi-item-nama">-</span>
+                <span id="p-resi-item-kurir" class="font-bold">-</span>
+            </div>
+            <div class="flex justify-between font-bold text-sm pt-2">
+                <span>TOTAL HARGA</span>
+                <span id="p-resi-item-harga">-</span>
+            </div>
+        </div>
+        <div class="border-b border-black border-dashed my-2"></div>
+        <div class="text-center text-[10px] leading-relaxed pt-2">
+            <p>Terima kasih Niniemore!</p>
+            <p class="font-sans text-[8px] tracking-widest mt-1.5 uppercase font-semibold">Tercetak Secara Otomatis Di Cloud Vercel</p>
+        </div>
+    </div>
+
+
+    <script>
+        // === CORE DATABASE & SEED INITIALIZERS ===
+        const DEFAULT_RECEIPTS_SEED = [];
+
+        const USER_CREDENTIALS = {
+            "ninieowner": {passwordHash: "Polkadot5.", displayName: "Agung Abdi (Owner)", role: "OWNER"},
+            "admin": {passwordHash: "Ninie123", displayName: "Siti Rahma (Admin)", role: "STAFF"}
+        };
+
+        // Application State State
+        let state = {
+            currentUser: null,
+            receipts: [],
+            searchQuery: "",
+            filterStatus: "ALL",
+            selectedTimeFilter: "Semua",
+            displayRevenue: true,
+            selectedReceiptNo: null,
+            selectedReceiptsForDelete: new Set(),
+            sheetsUrl: "",
+            isDarkMode: false
+        };
+
+        let analyticsChartInstance = null;
+
+        // On Load initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            // Theme settings load
+            if (localStorage.getItem('isDarkMode') !== null) {
+                state.isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+            }
+            applyTheme();
+
+            // Load credentials check from storage session
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                state.currentUser = JSON.parse(storedUser);
+            }
+
+            // Load receipts from cache so that actual user entered or synced entries are preserved
+            const storedReceipts = localStorage.getItem('receipts');
+            if (storedReceipts) {
+                state.receipts = JSON.parse(storedReceipts);
+            } else {
+                state.receipts = [];
+            }
+
+            // Sheets configuration with identical cloud script fallback
+            state.sheetsUrl = localStorage.getItem('sheetsUrl') || "https://script.google.com/macros/s/AKfycbzboeV5_sPQ8DnJd-uEePUUTp81UEr4jHD-hAUbJDbetTS8H2EINouY0DHxYmlU0Tc0nQ/exec";
+            document.getElementById('sheets-url-input').value = state.sheetsUrl;
+
+            // Route visual views depending on authentications
+            if (state.currentUser) {
+                showDashboard();
+            } else {
+                showLoginForm();
+            }
+        });
+
+        // Theme management API
+        function applyTheme() {
+            if (state.isDarkMode) {
+                document.documentElement.classList.add('dark');
+                document.body.classList.remove('bg-slate-5', 'text-slate-900');
+                document.body.classList.add('bg-slate-950', 'text-slate-100');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.body.classList.remove('bg-slate-950', 'text-slate-100');
+                document.body.classList.add('bg-slate-50', 'text-slate-900');
+            }
+            localStorage.setItem('isDarkMode', state.isDarkMode);
+        }
+
+        function toggleDarkMode() {
+            state.isDarkMode = !state.isDarkMode;
+            applyTheme();
+            updateChartThemeColors();
+        }
+
+        // Display switcher router utilities
+        function showLoginForm() {
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('app-dashboard').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('app-dashboard').classList.remove('hidden');
+
+            // Render details from role and name
+            document.getElementById('user-name-display').innerText = state.currentUser.displayName;
+            document.getElementById('user-role-display').innerText = state.currentUser.role;
+            document.getElementById('user-avatar-initial').innerText = state.currentUser.displayName.charAt(0);
+
+            // Fetch and update Stats lists
+            renderStatsWidgets();
+            renderTableReceipts();
+            renderChartVisualizer();
+        }
+
+        // Toast framework banners
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-x-full', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-x-0', 'opacity-100');
+            setTimeout(hideToast, 4000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('translate-x-full', 'opacity-0', 'pointer-events-none');
+            toast.classList.remove('translate-x-0', 'opacity-100');
+        }
+
+        // Manual password Visibility Switch
+        function togglePasswordVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+
+        // === AUTHENTICATION LOGIC CLIENT-SIDE ===
+        function handleManualLogin() {
+            const uInput = document.getElementById('login-username').value.trim();
+            const pInput = document.getElementById('login-password').value;
+
+            if (!uInput || !pInput) {
+                triggerLoginError("Harap lengkapi semua kolom!");
+                return;
+            }
+
+            const checkUser = USER_CREDENTIALS[uInput.toLowerCase()];
+            if (checkUser && checkUser.passwordHash === pInput) {
+                // Success entry
+                state.currentUser = {
+                    username: uInput.toLowerCase(),
+                    displayName: checkUser.displayName,
+                    role: checkUser.role
+                };
+                localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
+                hideLoginError();
+                showDashboard();
+                showToast(`Selamat datang kembali, ${state.currentUser.displayName}!`);
+            } else {
+                triggerLoginError("Username atau Password Karyawan salah!");
+            }
+        }
+
+        function triggerLoginError(message) {
+            const banner = document.getElementById('login-error-banner');
+            document.getElementById('login-error-text').innerText = message;
+            banner.classList.remove('hidden');
+        }
+
+        function hideLoginError() {
+            document.getElementById('login-error-banner').classList.add('hidden');
+        }
+
+        function handleLogout() {
+            state.currentUser = null;
+            localStorage.removeItem('currentUser');
+            showToast("Anda telah sukses keluar dari portal.");
+            showLoginForm();
+        }
+
+        // Google selection modals
+        function openGoogleSelector() {
+            document.getElementById('google-accounts-selector').classList.remove('hidden');
+        }
+
+        function closeGoogleSelector() {
+            document.getElementById('google-accounts-selector').classList.add('hidden');
+        }
+
+        function selectGoogleBypass(username, password) {
+            document.getElementById('login-username').value = username;
+            document.getElementById('login-password').value = password;
+            closeGoogleSelector();
+            handleManualLogin();
+        }
+
+        // Reset password triggers
+        function openResetDialog() {
+            document.getElementById('reset-password-dialog').classList.remove('hidden');
+        }
+
+        function closeResetDialog() {
+            document.getElementById('reset-password-dialog').classList.add('hidden');
+        }
+
+        function submitResetEmail() {
+            closeResetDialog();
+            const body = "Halo Admin,\n\nSaya ingin mengajukan konfirmasi reset password untuk akun saya di aplikasi Niniemore Corp.\n\nUsername:\nPassword Baru yang Diinginkan:\n\nTerima kasih.";
+            const mailtoUrl = `mailto:niniemorecorp@gmail.com?subject=Konfirmasi Reset Password - Niniemore Corp&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+            showToast("Meluncurkan aplikasi email konfirmasi...");
+        }
+
+
+        // === DASHBOARD TAB SWAP ROUTER ===
+        function switchTab(tabId) {
+            // Hide all tab components
+            document.getElementById('tab-analytics').classList.add('hidden');
+            document.getElementById('tab-receipts').classList.add('hidden');
+            document.getElementById('tab-tracking').classList.add('hidden');
+            document.getElementById('tab-sync').classList.add('hidden');
+
+            const btnAnalytics = document.getElementById('btn-tab-analytics');
+            const btnReceipts = document.getElementById('btn-tab-receipts');
+            const btnTracking = document.getElementById('btn-tab-tracking');
+            const btnSync = document.getElementById('btn-tab-sync');
+
+            const inactiveCls = "w-full flex items-center space-x-3 px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-darkSecondary hover:text-indigo-650 dark:hover:text-white rounded-xl text-xs sm:text-sm font-medium transition text-left cursor-pointer";
+            btnAnalytics.className = inactiveCls;
+            btnReceipts.className = inactiveCls;
+            btnTracking.className = inactiveCls;
+            btnSync.className = inactiveCls;
+
+            // Show active
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            const activeCls = "w-full flex items-center space-x-3 px-4 py-3 bg-indigo-600 dark:bg-darkPrimary text-white dark:text-[#381E72] font-extrabold rounded-xl text-xs sm:text-sm transition text-left shadow-md shadow-indigo-600/10 cursor-default";
+            if (tabId === 'tab-analytics') {
+                btnAnalytics.className = activeCls;
+                renderStatsWidgets();
+                renderChartVisualizer();
+            } else if (tabId === 'tab-receipts') {
+                btnReceipts.className = activeCls;
+                renderTableReceipts();
+            } else if (tabId === 'tab-tracking') {
+                btnTracking.className = activeCls;
+            } else if (tabId === 'tab-sync') {
+                btnSync.className = activeCls;
+            }
+        }
+
+
+        // === RENDER ENGINE TABLE & STATS ===
+        function renderStatsWidgets() {
+            const filteredReceipts = filterActiveRecords();
+            const rawSum = filteredReceipts.reduce((sum, item) => sum + item.itemPrice, 0);
+
+            // Display raw price if toggled visible
+            if (state.displayRevenue) {
+                document.getElementById('stat-revenue').innerText = formatIdr(rawSum);
+                document.getElementById('eye-icon-rev').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>`;
+            } else {
+                document.getElementById('stat-revenue').innerText = "Rp ••••••••";
+                document.getElementById('eye-icon-rev').innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18"></path>`;
+            }
+
+            document.getElementById('stat-transactions').innerText = filteredReceipts.length;
+            document.getElementById('stat-processed').innerText = filteredReceipts.filter(r => r.status === 'DIPROSES').length;
+            document.getElementById('stat-sent').innerText = filteredReceipts.filter(r => r.status === 'TERKIRIM').length;
+            document.getElementById('stat-received').innerText = filteredReceipts.filter(r => r.status === 'DITERIMA').length;
+        }
+
+        function toggleRevenueSecure() {
+            state.displayRevenue = !state.displayRevenue;
+            renderStatsWidgets();
+        }
+
+        function filterActiveRecords() {
+            let res = state.receipts;
+            // Search filter keyword
+            if (state.searchQuery.trim().length > 0) {
+                const term = state.searchQuery.toLowerCase();
+                res = res.filter(item => 
+                    item.receiptNumber.toLowerCase().includes(term) ||
+                    item.recipientName.toLowerCase().includes(term) ||
+                    item.itemName.toLowerCase().includes(term) ||
+                    item.courierName.toLowerCase().includes(term)
+                );
+            }
+
+            // Tabs status filter
+            if (state.filterStatus !== 'ALL') {
+                res = res.filter(item => item.status === state.filterStatus);
+            }
+
+            return res;
+        }
+
+        function renderTableReceipts() {
+            const list = filterActiveRecords();
+            const tbody = document.getElementById('receipts-tbody');
+            const emptySec = document.getElementById('empty-state');
+            const countLbl = document.getElementById('receipts-count');
+
+            tbody.innerHTML = "";
+            countLbl.innerText = list.length;
+
+            if (list.length === 0) {
+                emptySec.classList.remove('hidden');
+                document.getElementById('table-container').classList.add('hidden');
+                return;
+            }
+
+            emptySec.classList.add('hidden');
+            document.getElementById('table-container').classList.remove('hidden');
+
+            list.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/40 border-b border-slate-800/60 transition cursor-pointer select-none";
+                tr.onclick = (e) => {
+                    // Prevent detail modal toggle if checking checkboxes
+                    if (e.target.type === 'checkbox' || e.target.closest('.action-btn')) return;
+                    openDetailReceiptModal(item.receiptNumber);
+                };
+
+                const isChecked = state.selectedReceiptsForDelete.has(item.receiptNumber) ? "checked" : "";
+
+                // Status theme class loaders
+                let badgeClass = "bg-amber-600/20 border border-amber-500/20 text-amber-500";
+                if (item.status === 'TERKIRIM') badgeClass = "bg-blue-600/20 border border-blue-500/20 text-blue-400";
+                else if (item.status === 'DITERIMA') badgeClass = "bg-emerald-600/20 border border-emerald-500/20 text-emerald-400";
+
+                // Synced component classes
+                let syncBadge = `<span class="inline-flex items-center text-amber-500 text-xs">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </span>`;
+                if (item.synced) {
+                    syncBadge = `<span class="inline-flex items-center text-emerald-500 text-xs">
+                        <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </span>`;
+                }
+
+                // Delete utility restriction rules
+                const deleteActionBtn = state.currentUser.role === 'OWNER' 
+                    ? `<button onclick="deleteSingleReceipt('${item.receiptNumber}')" class="action-btn p-1.5 hover:bg-red-500/10 text-red-500 dark:text-red-400 rounded-lg hover:text-red-400 transition" title="Hapus"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-14v4M9 3h6"></path></svg></button>`
+                    : `<span class="text-slate-400 dark:text-slate-650 text-[10px] italic">No Access</span>`;
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center">
+                        <input type="checkbox" data-id="${item.receiptNumber}" onchange="toggleSelectRow('${item.receiptNumber}')" ${isChecked} class="row-checkbox w-4 h-4 rounded-md accent-indigo-600 bg-slate-900 border-slate-800">
+                    </td>
+                    <td class="py-3 px-4 font-mono font-bold text-slate-800 dark:text-white">${item.receiptNumber}</td>
+                    <td class="py-3 px-4">
+                        <p class="text-xs font-bold text-slate-800 dark:text-slate-100">${item.recipientName}</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono tracking-tight mt-0.5">${item.recipientPhone}</p>
+                    </td>
+                    <td class="py-3 px-4 truncate max-w-[120px] text-slate-700 dark:text-slate-300 font-semibold" title="${item.itemName}">${item.itemName}</td>
+                    <td class="py-3 px-4"><span class="px-2.5 py-0.5 text-[9px] font-extrabold uppercase bg-slate-100 dark:bg-slate-800 text-slate-650 dark:text-slate-300 rounded border border-slate-200 dark:border-slate-700">${item.courierName}</span></td>
+                    <td class="py-3 px-4 text-right font-mono font-bold text-indigo-600 dark:text-darkPrimary">${formatIdr(item.itemPrice)}</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="px-2.5 py-0.5 text-[8px] font-extrabold tracking-wider uppercase rounded-full ${badgeClass}">${item.status}</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">${syncBadge}</td>
+                    <td class="py-3 px-4 text-center flex items-center justify-center space-x-1">
+                        <button onclick="redirectAndTrack('${item.receiptNumber}')" class="action-btn p-1.5 hover:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-lg hover:text-emerald-550 transition" title="Lacak Paket">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </button>
+                        <button onclick="openDetailReceiptModal('${item.receiptNumber}')" class="action-btn p-1.5 hover:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-lg hover:text-indigo-300 transition" title="Lihat Milestones"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
+                        ${deleteActionBtn}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            syncBulkDeleteControlsState();
+        }
+
+        // Checkboxes handling API
+        function toggleSelectRow(receiptNo) {
+            if (state.selectedReceiptsForDelete.has(receiptNo)) {
+                state.selectedReceiptsForDelete.delete(receiptNo);
+            } else {
+                state.selectedReceiptsForDelete.add(receiptNo);
+            }
+            syncBulkDeleteControlsState();
+        }
+
+        function toggleSelectAll(masterCheckbox) {
+            const visibleList = filterActiveRecords();
+            if (masterCheckbox.checked) {
+                visibleList.forEach(item => state.selectedReceiptsForDelete.add(item.receiptNumber));
+            } else {
+                visibleList.forEach(item => state.selectedReceiptsForDelete.delete(item.receiptNumber));
+            }
+            renderTableReceipts();
+        }
+
+        function syncBulkDeleteControlsState() {
+            const activeList = filterActiveRecords();
+            const checkedBoxes = Array.from(document.querySelectorAll('.row-checkbox')).filter(cb => cb.checked);
+            const deleteBtn = document.getElementById('btn-bulk-delete');
+            const dCount = document.getElementById('delete-count');
+            
+            // Sync Master checkbox
+            const masterSelect = document.getElementById('master-select');
+            if (masterSelect) {
+                masterSelect.checked = activeList.length > 0 && checkedBoxes.length === activeList.length;
+            }
+
+            if (state.selectedReceiptsForDelete.size > 0 && state.currentUser.role === 'OWNER') {
+                deleteBtn.classList.remove('hidden');
+                dCount.innerText = state.selectedReceiptsForDelete.size;
+            } else {
+                deleteBtn.classList.add('hidden');
+            }
+        }
+
+
+        // === ACTIONS: CORE RECEIPTS TRANSACTION CRUD ===
+        function deleteSingleReceipt(receiptNo) {
+            if (state.currentUser.role !== 'OWNER') {
+                showToast("Akses ditolak: Hanya Owner yang berhak menghapus data!");
+                return;
+            }
+
+            if (confirm(`Apakah Anda yakin ingin menghapus resi ${receiptNo}?`)) {
+                // Remove item directly from the list array
+                state.receipts = state.receipts.filter(r => r.receiptNumber !== receiptNo);
+                state.selectedReceiptsForDelete.delete(receiptNo);
+                saveDatabase();
+                showToast(`Resi ${receiptNo} berhasil dihapus.`);
+                notifyDatabaseUpdated();
+            }
+        }
+
+        function triggerBulkDelete() {
+            if (state.currentUser.role !== 'OWNER') {
+                showToast("Akses ditolak: Hanya Owner yang berhak menghapus data!");
+                return;
+            }
+
+            const size = state.selectedReceiptsForDelete.size;
+            if (size === 0) return;
+
+            if (confirm(`Apakah Anda yakin ingin menghapus massal ${size} resi terpilih? Tindakan ini tidak dapat dibatalkan.`)) {
+                state.receipts = state.receipts.filter(r => !state.selectedReceiptsForDelete.has(r.receiptNumber));
+                state.selectedReceiptsForDelete.clear();
+                saveDatabase();
+                showToast(`Selesai menghapus ${size} resi dari sistem.`);
+                notifyDatabaseUpdated();
+            }
+        }
+
+        function saveDatabase() {
+            localStorage.setItem('receipts', JSON.stringify(state.receipts));
+        }
+
+        function notifyDatabaseUpdated() {
+            renderStatsWidgets();
+            renderTableReceipts();
+            renderChartVisualizer();
+        }
+
+
+        // ==========================================
+        // === SCANNING & COURIER MATCHING LOGIC ====
+        // ==========================================
+        let html5QrCode = null;
+
+        function openScanModal() {
+            document.getElementById('scan-receipt-modal').classList.remove('hidden');
+            document.getElementById('scan-feedback').innerText = "Arahkan kamera ke barcode/QR Code resi, atau isi testing form di bawah.";
+            document.getElementById('scan-feedback').className = "bg-emerald-950/5 p-3.5 rounded-xl text-xs text-emerald-400 border border-emerald-500/10";
+            
+            // Re-initialize code input
+            document.getElementById('input-mock-barcode').value = "";
+            
+            // Spawn reader
+            if (!html5QrCode) {
+                html5QrCode = new Html5Qrcode("qr-reader");
+            }
+            
+            const config = { fps: 10, qrbox: { width: 250, height: 150 } };
+            
+            html5QrCode.start(
+                { facingMode: "environment" }, 
+                config,
+                (decodedText, decodedResult) => {
+                    // Success callback
+                    const courier = detectWebCourier(decodedText);
+                    document.getElementById('scan-feedback').innerText = `BERHASIL: Resi ${decodedText} terdeteksi sebagai ${courier}!`;
+                    document.getElementById('scan-feedback').className = "bg-emerald-500/10 p-3.5 rounded-xl text-xs text-emerald-400 border border-emerald-500/30 font-bold";
+                    
+                    setTimeout(() => {
+                        onScanFinished(decodedText, courier);
+                    }, 800);
+                },
+                (errorMessage) => {
+                    // Silent parse failures (very common during high-fps frames)
+                }
+            ).catch(err => {
+                console.warn("Kamera gagal diakses: ", err);
+                document.getElementById('scan-feedback').innerText = `INFO PEMBACA: Kamera tidak terdeteksi atau izin ditolak. Silakan gunakan TESTING BOARD di bawah untuk simulasi.`;
+                document.getElementById('scan-feedback').className = "bg-amber-500/15 p-3.5 rounded-xl text-xs text-amber-400 border border-amber-500/20";
+            });
+        }
+
+        function closeScanModal() {
+            if (html5QrCode && html5QrCode.isScanning) {
+                html5QrCode.stop().then(() => {
+                    document.getElementById('scan-receipt-modal').classList.add('hidden');
+                }).catch(err => {
+                    console.error(err);
+                    document.getElementById('scan-receipt-modal').classList.add('hidden');
+                });
+            } else {
+                document.getElementById('scan-receipt-modal').classList.add('hidden');
+            }
+        }
+
+        function detectWebCourier(code) {
+            const clean = code.trim().replace(/\s+/g, "").toUpperCase();
+            
+            // J&T Express format
+            if (/^JX\d+$/.test(clean) || (clean.length === 12 && /^\d+$/.test(clean))) {
+                return "J&T Express";
+            }
+            
+            // Wahana format: start with W followed by 7 to 11 alphanumerics
+            if (/^W[A-Z0-9]{7,11}$/.test(clean)) {
+                return "Wahana";
+            }
+            
+            // Indah Cargo: 3 letters followed by 7 to 10 digits
+            if (/^[A-Z]{3}\d{7,10}$/.test(clean)) {
+                return "Indah Cargo";
+            }
+            
+            return "J&T Express"; // Fallback default
+        }
+
+        function onScanFinished(code, courier) {
+            // Add a receipt with randomized names & products
+            const sampleNames = ["Andi Wijaya", "Siti Aminah", "Budi Santoso", "Dewi Lestari", "Rian Hidayat"];
+            const sampleItems = ["Paket Pakaian Hijab", "Alat Elektronik Gaming", "Aksesoris Kosmetik", "Sepatu Olahraga Running", "Kopi Bubuk Arabika"];
+            const sampleAddresses = ["Gg. Merdeka No. 45, Coblong, Bandung, Jawa Barat", "Jl. Jenderal Sudirman No. 12, Kebayoran Baru, Jakarta Selatan", "Perum Indah Regency Blok B4, Sukolilo, Surabaya", "Jl. Kaliurang KM 5.6, Depok, Sleman, Yogyakarta", "Perum Graha Asri No. 18, Tembalang, Semarang"];
+
+            const randName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+            const randItem = sampleItems[Math.floor(Math.random() * sampleItems.length)];
+            const randAddress = sampleAddresses[Math.floor(Math.random() * sampleAddresses.length)];
+            const randPhone = "0812" + Math.floor(10000000 + Math.random() * 90000000);
+            const randPrice = [45000, 75000, 150000, 320000, 120000][Math.floor(Math.random() * 5)];
+
+            // Push into receipts state array
+            const newReceipt = {
+                no_resi: code,
+                penerima: randName,
+                telepon: randPhone,
+                alamat: randAddress,
+                kurir: courier,
+                barang: randItem,
+                harga: randPrice,
+                status: "DIPROSES",
+                created_at: new Date().toISOString()
+            };
+
+            state.receipts.unshift(newReceipt);
+            saveDatabase();
+            notifyDatabaseUpdated();
+            
+            // Trigger automatic synchronization (HTTP POST as requested by the user)
+            syncReceiptWithServer(newReceipt);
+
+            closeScanModal();
+        }
+
+        function simulateWebcamScan() {
+            const rawVal = document.getElementById('input-mock-barcode').value.trim();
+            if (!rawVal) {
+                alert("Harap masukkan nomor resi simulasi terlebih dahulu!");
+                return;
+            }
+            const courier = detectWebCourier(rawVal);
+            document.getElementById('scan-feedback').innerText = `SIMULASI BERHASIL: Resi ${rawVal} terdeteksi sebagai ${courier}!`;
+            document.getElementById('scan-feedback').className = "bg-emerald-500/10 p-3.5 rounded-xl text-xs text-emerald-400 border border-emerald-500/30 font-bold";
+
+            setTimeout(() => {
+                onScanFinished(rawVal, courier);
+            }, 600);
+        }
+
+        function syncReceiptWithServer(receipt) {
+            const webhookUrl = state.sheetsUrl || "";
+            if (!webhookUrl) {
+                console.log("Tidak ada Sheets Webhook URL terkonfigurasi, sinkronisasi dilewati.");
+                return;
+            }
+
+            console.log(`Mengirim POST sinkronisasi untuk resi ${receipt.no_resi || receipt.receiptNumber} ke: ${webhookUrl}`);
+            
+            // Use standard form-data or JSON fetch as background request
+            fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors', // To satisfy CORS issues during simple cross-site sheets post
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: "createReceipt",
+                    receiptNo: receipt.no_resi || receipt.receiptNumber,
+                    recipientName: receipt.penerima || receipt.recipientName,
+                    recipientPhone: receipt.telepon || receipt.recipientPhone,
+                    recipientAddress: receipt.alamat || receipt.recipientAddress,
+                    courierName: receipt.kurir || receipt.courierName,
+                    itemName: receipt.barang || receipt.itemName,
+                    itemPrice: receipt.harga || receipt.itemPrice,
+                    status: receipt.status,
+                    timestamp: receipt.created_at || new Date(receipt.timestamp).toISOString(),
+                    lastUpdated: receipt.created_at || new Date(receipt.lastUpdated || receipt.timestamp).toISOString()
+                })
+            })
+            .then(res => {
+                console.log("Sinkronisasi HTTP POST sukses dilakukan.");
+            })
+            .catch(err => {
+                console.error("Gagal melakukan sinkronisasi HTTP POST: ", err);
+            });
+        }
+
+        // === DIALOG ACTION: ADD NEW RECEIPT ===
+        function openAddReceiptModal() {
+            // Preset unique serial random receipt code to input placeholder
+            const randNo = "RU-" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('input-no-resi').placeholder = randNo;
+            document.getElementById('input-no-resi').value = "";
+            document.getElementById('input-penerima').value = "";
+            document.getElementById('input-telepon').value = "";
+            document.getElementById('input-barang').value = "";
+            document.getElementById('input-harga').value = "";
+            document.getElementById('input-alamat').value = "";
+
+            document.getElementById('add-receipt-modal').classList.remove('hidden');
+        }
+
+        function closeAddReceiptModal() {
+            document.getElementById('add-receipt-modal').classList.add('hidden');
+        }
+
+        function submitNewReceipt() {
+            let resNo = document.getElementById('input-no-resi').value.trim();
+            const penerima = document.getElementById('input-penerima').value.trim();
+            const telepon = document.getElementById('input-telepon').value.trim();
+            const kurir = document.getElementById('input-kurir').value;
+            const barang = document.getElementById('input-barang').value.trim();
+            const harga = parseFloat(document.getElementById('input-harga').value);
+            const alamat = document.getElementById('input-alamat').value.trim();
+
+            if (!penerima || !telepon || !barang || isNaN(harga) || !alamat) {
+                alert("Harap lengkapi semua kolom formulir data resi!");
+                return;
+            }
+
+            // Fill default receipt number if omitted
+            if (!resNo) {
+                resNo = document.getElementById('input-no-resi').placeholder;
+            }
+
+            // Uniqueness validation checks
+            if (state.receipts.some(r => r.receiptNumber.toUpperCase() === resNo.toUpperCase())) {
+                alert("Nomor resi ini sudah terdaftar dalam sistem database!");
+                return;
+            }
+
+            const now = Date.now();
+            const newObj = {
+                receiptNumber: resNo,
+                recipientName: penerima,
+                recipientPhone: telepon,
+                recipientAddress: alamat,
+                courierName: kurir,
+                itemName: barang,
+                itemPrice: harga,
+                status: "DIPROSES",
+                timestamp: now,
+                lastUpdated: now,
+                synced: false,
+                trackingLogsJson: JSON.stringify([
+                    {timestamp: now, description: `Resi berhasil dibuat oleh seller. Menunggu penjemputan mitra ekspedisi ${kurir}.`, location: "Kios Seller"}
+                ])
+            };
+
+            state.receipts.unshift(newObj);
+            saveDatabase();
+            closeAddReceiptModal();
+            showToast(`Sukses membuat resi logistik baru ${resNo}!`);
+            notifyDatabaseUpdated();
+        }
+
+
+        // === DIALOG ACTION: DETAIL SHIPMENT MILESTONE & TRACKING UPDATE ===
+        function openDetailReceiptModal(receiptNo) {
+            const item = state.receipts.find(r => r.receiptNumber === receiptNo);
+            if (!item) return;
+
+            state.selectedReceiptNo = receiptNo;
+
+            document.getElementById('detail-no-resi').innerText = item.receiptNumber;
+            document.getElementById('detail-penerima-nama').innerText = item.recipientName;
+            document.getElementById('detail-penerima-phone').innerText = item.recipientPhone;
+            document.getElementById('detail-penerima-alamat').innerText = item.recipientAddress;
+            document.getElementById('detail-barang-nama').innerText = item.itemName;
+            document.getElementById('detail-barang-kurir').innerText = `Kurir: ${item.courierName}`;
+            document.getElementById('detail-barang-harga').innerText = formatIdr(item.itemPrice);
+
+            // Badges colors selector details
+            const btnStatus = document.getElementById('detail-badge-status');
+            btnStatus.innerText = item.status;
+            btnStatus.className = "px-2.5 py-0.5 text-[8px] font-extrabold uppercase rounded-full";
+            if (item.status === 'TERKIRIM') btnStatus.classList.add("bg-blue-600/20", "border", "border-blue-500/20", "text-blue-400");
+            else if (item.status === 'DITERIMA') btnStatus.classList.add("bg-emerald-600/20", "border", "border-emerald-500/20", "text-emerald-400");
+            else btnStatus.classList.add("bg-amber-600/20", "border", "border-amber-500/20", "text-amber-500");
+
+            // Logs timelines generator
+            renderTimelineLogs(item);
+
+            // Authorized elements setup. Hide updates if status is completed (DITERIMA)
+            const actPanel = document.getElementById('detail-actions-panel');
+            if (item.status === 'DITERIMA') {
+                actPanel.classList.add('hidden');
+            } else {
+                actPanel.classList.remove('hidden');
+                document.getElementById('detail-update-status').value = item.status;
+                document.getElementById('detail-update-comment').value = "";
+                document.getElementById('detail-update-location').value = "";
+            }
+
+            document.getElementById('detail-receipt-modal').classList.remove('hidden');
+        }
+
+        function closeDetailReceiptModal() {
+            document.getElementById('detail-receipt-modal').classList.add('hidden');
+            state.selectedReceiptNo = null;
+        }
+
+        function renderTimelineLogs(item) {
+            const logsStack = document.getElementById('detail-timeline-stack');
+            logsStack.innerHTML = "";
+
+            let parseLogs = [];
+            try {
+                parseLogs = JSON.parse(item.trackingLogsJson);
+                // Sort to display latest chronological logs at the top
+                parseLogs.sort((a,b) => b.timestamp - a.timestamp);
+            } catch(e) {
+                parseLogs = [{timestamp: item.timestamp, description: "Catatan pembuatan resi default.", location: "Kantor Operasional"}];
+            }
+
+            parseLogs.forEach((logVal, i) => {
+                const dateText = formatDateText(logVal.timestamp);
+                const dotMarker = i === 0 
+                    ? `<span class="absolute -left-1.5 top-1.5 w-3.5 h-3.5 bg-indigo-500 border border-slate-900 rounded-full shadow-lg shadow-indigo-500/20 animate-pulse"></span>`
+                    : `<span class="absolute -left-1.5 top-1.5 w-2.5 h-2.5 bg-slate-700 border border-slate-900 rounded-full"></span>`;
+
+                const node = document.createElement('div');
+                node.className = "relative pl-4 space-y-1";
+                node.innerHTML = `
+                    ${dotMarker}
+                    <p class="text-[10px] font-bold text-slate-450 text-slate-400 font-mono">${dateText}</p>
+                    <p class="text-xs font-bold text-slate-200 leading-normal">${logVal.description}</p>
+                    <p class="text-[10px] text-indigo-400 font-mono flex items-center">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        ${logVal.location}
+                    </p>
+                `;
+                logsStack.appendChild(node);
+            });
+        }
+
+        function submitReceiptUpdate() {
+            const index = state.receipts.findIndex(r => r.receiptNumber === state.selectedReceiptNo);
+            if (index === -1) return;
+
+            const item = state.receipts[index];
+            const nextStatus = document.getElementById('detail-update-status').value;
+            let comment = document.getElementById('detail-update-comment').value.trim();
+            let location = document.getElementById('detail-update-location').value.trim();
+
+            if (!comment) comment = `Paket logistik berpindah status pengiriman ke ${nextStatus}.`;
+            if (!location) location = "DC Transit Pusat";
+
+            let parsedLogs = [];
+            try {
+                parsedLogs = JSON.parse(item.trackingLogsJson);
+            } catch(e) {}
+
+            const now = Date.now();
+            parsedLogs.push({
+                timestamp: now,
+                description: comment,
+                location: location
+            });
+
+            // Replace updated keys in local state
+            state.receipts[index] = {
+                ...item,
+                status: nextStatus,
+                lastUpdated: now,
+                synced: false, // Clear cloud status for re-sync
+                trackingLogsJson: JSON.stringify(parsedLogs)
+            };
+
+            saveDatabase();
+            showToast(`Sukses memperbarui status pengiriman Resi ${item.receiptNumber}!`);
+            closeDetailReceiptModal();
+            notifyDatabaseUpdated();
+        }
+
+
+        // === ACTIONS: PRINT INVOICE & EXPORT DATA ===
+        function printVoucherInvoice() {
+            const item = state.receipts.find(r => r.receiptNumber === state.selectedReceiptNo);
+            if (!item) return;
+
+            // Load values to print templates
+            document.getElementById('p-resi-no').innerText = item.receiptNumber;
+            document.getElementById('p-resi-date').value = formatDateText(item.timestamp);
+            document.getElementById('p-resi-status').innerText = item.status;
+            document.getElementById('p-resi-penerima-nama').innerText = item.recipientName;
+            document.getElementById('p-resi-penerima-phone').innerText = item.recipientPhone;
+            document.getElementById('p-resi-penerima-alamat').innerText = item.recipientAddress;
+            document.getElementById('p-resi-item-nama').innerText = item.itemName;
+            document.getElementById('p-resi-item-kurir').innerText = `Kurir: ${item.courierName}`;
+            document.getElementById('p-resi-item-harga').innerText = formatIdr(item.itemPrice);
+
+            // Execute client printer stream
+            window.print();
+        }
+
+        function exportSingleCSV() {
+            const item = state.receipts.find(r => r.receiptNumber === state.selectedReceiptNo);
+            if (!item) return;
+
+            const headers = "No Resi,Penerima,Telepon,Alamat,Kurir,Barang,Harga,Status,Synced\n";
+            const rowData = `"${item.receiptNumber}","${item.recipientName}","${item.recipientPhone}","${item.recipientAddress}","${item.courierName}","${item.itemName}",${item.itemPrice},"${item.status}",${item.synced}\n`;
+            
+            const blob = new Blob([headers + rowData], {type: 'text/csv;charset=utf-8;'});
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `Data_Resi_${item.receiptNumber}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+
+        // === GOOGLE SHEETS SYNCHRONIZER METRIC INTERFACE ===
+        function saveSheetsUrl() {
+            const inputVal = document.getElementById('sheets-url-input').value.trim();
+            state.sheetsUrl = inputVal;
+            localStorage.setItem('sheetsUrl', inputVal);
+            showToast("Konfigurasi Google Sheets berhasil disimpan!");
+        }
+
+        function triggerFullCloudSync() {
+            const url = state.sheetsUrl || "";
+            
+            const card = document.getElementById('sync-status-card');
+            const icon = document.getElementById('sync-status-icon');
+            const title = document.getElementById('sync-status-title');
+            const desc = document.getElementById('sync-status-description');
+            const spinner = document.getElementById('sync-spinner');
+
+            card.classList.remove('hidden');
+            spinner.classList.remove('hidden');
+
+            // Dynamic progress phases animation simulator
+            icon.innerHTML = `<span class="w-6 h-6 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></span>`;
+            
+            let pulledReceipts = [];
+            let pullSuccess = false;
+
+            if (url) {
+                title.innerText = "Menghubungkan ke Sheets Cloud...";
+                desc.innerText = "Mengunduh records resi dari database Google...";
+                
+                fetch(url)
+                    .then(response => response.json())
+                    .then(jsonData => {
+                        if (jsonData.status === 'success' && jsonData.receipts) {
+                            pulledReceipts = jsonData.receipts;
+                            pullSuccess = true;
+                        }
+                        proceedWithSync();
+                    })
+                    .catch(err => {
+                        console.error("Gagal menarik data dari Sheets:", err);
+                        proceedWithSync(); // Continue to push local even if GET fails
+                    });
+            } else {
+                title.innerText = "Mengindeks Basis Data Lokal...";
+                desc.innerText = "Menghubungkan luring (Mode Simulasi)...";
+                setTimeout(proceedWithSync, 1200);
+            }
+
+            function proceedWithSync() {
+                title.innerText = "Mengindeks & Meringkas Sinkronisasi...";
+                desc.innerText = "Menghitung perbedaan set transaksi web dan cloud...";
+
+                setTimeout(() => {
+                    let successCount = 0;
+                    let pulledCount = 0;
+
+                    // 1. Merge pulled remotely-defined receipts into local state
+                    if (pullSuccess && pulledReceipts.length > 0) {
+                        pulledReceipts.forEach(remote => {
+                            const localIndex = state.receipts.findIndex(r => r.receiptNumber.toUpperCase() === remote.receiptNumber.toUpperCase());
+                            
+                            if (localIndex === -1) {
+                                // Insert receipt into local state since it does not exist locally
+                                const remoteTimestamp = remote.dateInput ? new Date(remote.dateInput).getTime() : Date.now();
+                                const remoteLastUpdated = remote.lastUpdated ? new Date(remote.lastUpdated).getTime() : remoteTimestamp;
+                                
+                                state.receipts.unshift({
+                                    receiptNumber: remote.receiptNumber,
+                                    recipientName: remote.recipientName,
+                                    recipientPhone: remote.recipientPhone,
+                                    recipientAddress: remote.recipientAddress,
+                                    courierName: remote.courierName,
+                                    itemName: remote.itemName,
+                                    itemPrice: Number(remote.itemPrice) || 0,
+                                    status: remote.status,
+                                    timestamp: remoteTimestamp,
+                                    lastUpdated: remoteLastUpdated,
+                                    synced: true,
+                                    trackingLogsJson: JSON.stringify([
+                                        { timestamp: remoteTimestamp, description: "Sinkronisasi otomatis dengan server cloud.", location: "Google Sheets" }
+                                    ])
+                                });
+                                pulledCount++;
+                            } else {
+                                // Exists locally. Compare lastUpdated timestamps to pick latest status
+                                const local = state.receipts[localIndex];
+                                const remoteTimestamp = remote.dateInput ? new Date(remote.dateInput).getTime() : Date.now();
+                                const remoteLastUpdated = remote.lastUpdated ? new Date(remote.lastUpdated).getTime() : remoteTimestamp;
+                                
+                                if (remoteLastUpdated > local.lastUpdated) {
+                                    state.receipts[localIndex] = {
+                                        ...local,
+                                        status: remote.status,
+                                        lastUpdated: remoteLastUpdated,
+                                        synced: true
+                                    };
+                                    pulledCount++;
+                                }
+                            }
+                        });
+                    }
+
+                    // 2. Identify local unsynced files & push them
+                    const unsyncedList = state.receipts.filter(r => !r.synced);
+
+                    if (url && unsyncedList.length > 0) {
+                        title.innerText = "Mengunggah Logistik Sektor...";
+                        desc.innerText = `Menyelaraskan ${unsyncedList.length} draf transaksi lokal...`;
+
+                        let pendingPosts = unsyncedList.length;
+                        unsyncedList.forEach(receipt => {
+                            fetch(url, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    action: "createReceipt",
+                                    receiptNo: receipt.receiptNumber,
+                                    recipientName: receipt.recipientName,
+                                    recipientPhone: receipt.recipientPhone,
+                                    recipientAddress: receipt.recipientAddress,
+                                    courierName: receipt.courierName,
+                                    itemName: receipt.itemName,
+                                    itemPrice: receipt.itemPrice,
+                                    status: receipt.status,
+                                    timestamp: new Date(receipt.timestamp).toISOString(),
+                                    lastUpdated: new Date(receipt.lastUpdated || receipt.timestamp).toISOString()
+                                })
+                            })
+                            .then(() => {
+                                const idx = state.receipts.findIndex(r => r.receiptNumber === receipt.receiptNumber);
+                                if (idx !== -1) {
+                                    state.receipts[idx].synced = true;
+                                }
+                                successCount++;
+                                stepCheck();
+                            })
+                            .catch(err => {
+                                console.error("Gagal mengunggah resi:", receipt.receiptNumber, err);
+                                stepCheck();
+                            });
+                        });
+
+                        function stepCheck() {
+                            pendingPosts--;
+                            if (pendingPosts === 0) {
+                                finalizeSync();
+                            }
+                        }
+                    } else {
+                        // Mark local unjoined ones as synced (fallback / nothing to push)
+                        state.receipts.forEach((r, idx) => {
+                            state.receipts[idx].synced = true;
+                        });
+                        finalizeSync();
+                    }
+
+                    function finalizeSync() {
+                        spinner.classList.add('hidden');
+                        saveDatabase();
+                        renderTableReceipts();
+                        notifyDatabaseUpdated();
+
+                        icon.innerHTML = `<svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                        title.innerText = "Sinkronisasi Sukses Sempurna!";
+                        
+                        if (url) {
+                            desc.innerText = `Sinkronisasi selesai: Mengunggah ${successCount} data, mengunduh ${pulledCount} data baru dari Sheets cloud.`;
+                        } else {
+                            desc.innerText = `Mode simulasi selesai: Semua draf disinkronkan ke memori luring.`;
+                        }
+
+                        showToast("Sinkronisasi database dengan Sheets Cloud sukses!");
+                        
+                        setTimeout(() => {
+                            card.classList.add('hidden');
+                        }, 5000);
+                    }
+                }, 1200);
+            }
+        }
+
+        // Danger zone reset operations
+        function triggerDatabaseReset() {
+            if (confirm("Apakah Anda yakin ingin mematikan semua modifikasi data? Seluruh input resi baru akan terhapus secara permanen.")) {
+                state.receipts = [...DEFAULT_RECEIPTS_SEED];
+                saveDatabase();
+                showToast("Sistem log database sukses di-reset ke sample standar!");
+                notifyDatabaseUpdated();
+            }
+        }
+
+
+        // === CONTROLLER CRON & SIMULATION TRIGGERS ===
+        function triggerHourlySimulation() {
+            // Pick an active non-completed receipt and update its logistics log!
+            const incomplete = state.receipts.filter(r => r.status !== 'DITERIMA');
+            if (incomplete.length === 0) {
+                showToast("Semua status resi logs sudah terkirim sepenuhnya!");
+                return;
+            }
+
+            // Pick first
+            const rObj = incomplete[0];
+            const originalStatus = rObj.status;
+            let nextStatus = originalStatus;
+            let logComment = "";
+            let logLocation = "";
+
+            if (originalStatus === 'DIPROSES') {
+                nextStatus = "TERKIRIM";
+                logComment = "Kurir logistik telah menjemput parcels. Paket dalam perjalanan (In-Transit).";
+                logLocation = "Gudang Sortir Transit Sektor";
+            } else if (originalStatus === 'TERKIRIM') {
+                nextStatus = "DITERIMA";
+                logComment = "Sopir ekspedisi melaporkan paket berhasil diserahkan kepada pihak koresponden.";
+                logLocation = "Alamat Penerima";
+            }
+
+            const indexes = state.receipts.findIndex(r => r.receiptNumber === rObj.receiptNumber);
+            let parsedLogs = [];
+            try {
+                parsedLogs = JSON.parse(rObj.trackingLogsJson);
+            } catch(e) {}
+
+            const now = Date.now();
+            parsedLogs.push({
+                timestamp: now,
+                description: logComment,
+                location: logLocation
+            });
+
+            state.receipts[indexes] = {
+                ...rObj,
+                status: nextStatus,
+                lastUpdated: now,
+                synced: false,
+                trackingLogsJson: JSON.stringify(parsedLogs)
+            };
+
+            saveDatabase();
+            showToast(`Simulasi otomatis: Resi ${rObj.receiptNumber} diupdate ke ${nextStatus}!`);
+            notifyDatabaseUpdated();
+        }
+
+
+        // === SEARCH BAR KEYS TRIGGER ===
+        function handleSearch() {
+            state.searchQuery = document.getElementById('receipt-search').value;
+            renderTableReceipts();
+        }
+
+        function setStatusFilter(activeStatus) {
+            state.filterStatus = activeStatus;
+            
+            // Clean tabs background colors
+            const tabs = ['ALL', 'DIPROSES', 'TERKIRIM', 'DITERIMA'];
+            const labels = {
+                'ALL': 'tab-all',
+                'DIPROSES': 'tab-proses',
+                'TERKIRIM': 'tab-kirim',
+                'DITERIMA': 'tab-terima'
+            };
+
+            tabs.forEach(t => {
+                const el = document.getElementById(labels[t]);
+                el.className = "px-4 py-2 text-xs font-semibold hover:bg-slate-800 text-slate-400 hover:text-slate-200 rounded-xl transition";
+            });
+
+            // Set active
+            document.getElementById(labels[activeStatus]).className = "px-4 py-2 text-xs font-bold bg-indigo-600 text-white rounded-xl transition";
+            
+            renderTableReceipts();
+        }
+
+
+        // === SPECIALIZED LOGISTICS DATA TRACKING CONTROLLER (NEW IN WEB DASHBOARD) ===
+        function handleTrackingSearch() {
+            const trackingNoInput = document.getElementById('tracking-search-input').value.trim();
+            const courierInput = document.getElementById('tracking-courier-select').value;
+
+            if (!trackingNoInput) {
+                showToast("Harap masukkan nomor resi terlebih dahulu!");
+                return;
+            }
+
+            // Find matching item
+            const item = state.receipts.find(r => 
+                r.receiptNumber.toUpperCase() === trackingNoInput.toUpperCase() && 
+                (courierInput === 'ALL' || r.courierName === courierInput)
+            );
+
+            const resultPanel = document.getElementById('tracking-result-panel');
+            const emptyState = document.getElementById('tracking-empty-state');
+
+            if (!item) {
+                resultPanel.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                showToast(`Resi ${trackingNoInput} tidak ditemukan dalam sistem database!`);
+                return;
+            }
+
+            // Bind values to UI panel
+            emptyState.classList.add('hidden');
+            resultPanel.classList.remove('hidden');
+
+            document.getElementById('tracker-badge-courier').innerText = item.courierName;
+            document.getElementById('tracker-display-receipt').innerText = item.receiptNumber;
+            document.getElementById('tracker-display-recipient').innerText = item.recipientName;
+            document.getElementById('tracker-display-item').innerText = item.itemName;
+            document.getElementById('tracker-display-price').innerText = formatIdr(item.itemPrice);
+            document.getElementById('tracker-display-address').innerText = item.recipientAddress;
+            
+            const stsText = document.getElementById('tracker-display-status');
+            const stsMeta = document.getElementById('tracker-display-meta');
+            stsText.innerText = item.status;
+            
+            // Highlight current status badge class
+            stsText.className = "px-4 py-2 rounded-xl text-xs font-black inline-flex items-center";
+            if (item.status === 'TERKIRIM') {
+                stsText.classList.add("bg-blue-500/10", "text-blue-500", "border", "border-blue-500/20");
+                stsMeta.innerText = "Dalam Perjalanan transit";
+            } else if (item.status === 'DITERIMA') {
+                stsText.classList.add("bg-emerald-500/10", "text-emerald-500", "border", "border-emerald-500/20");
+                stsMeta.innerText = "Kurir mengantar sukses diterima";
+            } else {
+                stsText.classList.add("bg-amber-500/10", "text-amber-500", "border", "border-amber-500/20");
+                stsMeta.innerText = "Sedang disiapkan seller";
+            }
+
+            // Populate Milestones Stack
+            const milestoneList = document.getElementById('tracker-milestones-list');
+            milestoneList.innerHTML = "";
+
+            let parseLogs = [];
+            try {
+                parseLogs = JSON.parse(item.trackingLogsJson);
+                parseLogs.sort((a,b) => b.timestamp - a.timestamp); // latest first
+            } catch(e) {
+                parseLogs = [{timestamp: item.timestamp, description: "Resi telah dibuat oleh seller.", location: "Kios Seller"}];
+            }
+
+            parseLogs.forEach((logVal, idx) => {
+                const dateText = formatDateText(logVal.timestamp);
+                const dotMarker = idx === 0 
+                    ? `<span class="absolute -left-[5px] top-[5px] w-3 h-3 bg-indigo-500 border-2 border-white dark:border-darkSurface rounded-full shadow shadow-indigo-500/50 animate-ping"></span>
+                       <span class="absolute -left-[5px] top-[5px] w-3 h-3 bg-indigo-600 border-2 border-white dark:border-darkSurface rounded-full"></span>`
+                    : `<span class="absolute -left-[3px] top-[5px] w-2 h-2 bg-slate-350 dark:bg-slate-700 rounded-full border border-white dark:border-darkSurface"></span>`;
+
+                const node = document.createElement('div');
+                node.className = "relative pl-6 space-y-1";
+                node.innerHTML = `
+                    ${dotMarker}
+                    <p class="text-[10px] font-bold text-slate-400 font-mono">${dateText}</p>
+                    <p class="text-xs font-bold text-slate-800 dark:text-slate-200 leading-normal">${logVal.description}</p>
+                    <p class="text-[10px] text-indigo-500 font-mono flex items-center">
+                        <svg class="w-3 h-3 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        ${logVal.location}
+                    </p>
+                `;
+                milestoneList.appendChild(node);
+            });
+        }
+
+        // Bridge function linking table 'Lacak' button directly into tracker page view
+        function redirectAndTrack(receiptNo) {
+            switchTab('tab-tracking');
+            document.getElementById('tracking-search-input').value = receiptNo;
+            document.getElementById('tracking-courier-select').value = "ALL";
+            handleTrackingSearch();
+        }
+
+        // === MASTER TIME PILL SEGMENT FILTERS ===
+        function setGlobalTimeFilter(filterVal) {
+            state.selectedTimeFilter = filterVal;
+
+            const filterOptions = ['Hari Ini', '7 Hari', 'Semua'];
+            const ids = {
+                'Hari Ini': 'filter-time-day',
+                '7 Hari': 'filter-time-week',
+                'Semua': 'filter-time-all'
+            };
+
+            filterOptions.forEach(f => {
+                const el = document.getElementById(ids[f]);
+                el.className = "px-3.5 py-1.5 text-slate-500 dark:text-darkSecondary hover:text-indigo-600 dark:hover:text-white rounded-lg transition cursor-pointer";
+            });
+
+            // Set active segmented option colors based on system dark mode state
+            const isDark = document.documentElement.classList.contains('dark');
+            const activeEl = document.getElementById(ids[filterVal]);
+            if (activeEl) {
+                if (filterVal === 'Semua') {
+                    activeEl.className = "px-3.5 py-1.5 text-white dark:text-[#381E72] bg-[#D0BCFF] dark:bg-[#10B981] font-black rounded-lg shadow-sm cursor-default";
+                } else {
+                    activeEl.className = "px-3.5 py-1.5 text-white bg-indigo-600 dark:bg-darkPrimary dark:text-[#381E72] font-black rounded-lg shadow-sm cursor-default";
+                }
+            }
+
+            renderStatsWidgets();
+        }
+
+
+        // === DATA VISUALIZATION CHART CONTROLLER ===
+        function setChartFilter(filterVal) {
+            const filters = ['Week', 'Month', 'Years'];
+            const ids = {
+                'Week': 'filter-day',
+                'Month': 'filter-week',
+                'Years': 'filter-all'
+            };
+
+            filters.forEach(f => {
+                const el = document.getElementById(ids[f]);
+                if (el) {
+                    el.className = "px-3.5 py-1.5 text-slate-500 dark:text-[#CAC4D0] rounded-lg hover:text-indigo-650 dark:hover:text-white transition cursor-pointer";
+                }
+            });
+
+            const activeEl = document.getElementById(ids[filterVal]);
+            if (activeEl) {
+                activeEl.className = "px-3.5 py-1.5 text-[#381E72] dark:text-[#381E72] bg-[#D0BCFF] font-black rounded-lg shadow-sm cursor-default";
+            }
+            renderChartVisualizer();
+        }
+
+        function renderChartVisualizer() {
+            const ctx = document.getElementById('analyticsChart').getContext('2d');
+            const dataMap = filterActiveRecords();
+
+            // Populate counts
+            const procesCount = dataMap.filter(r => r.status === 'DIPROSES').length;
+            const sentCount = dataMap.filter(r => r.status === 'TERKIRIM').length;
+            const recovCount = dataMap.filter(r => r.status === 'DITERIMA').length;
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const labelColor = isDark ? '#94a3b8' : '#475569';
+            const gridColor = isDark ? '#1e293b' : '#cbd5e1';
+
+            if (analyticsChartInstance) {
+                analyticsChartInstance.destroy();
+            }
+
+            analyticsChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['DIPROSES', 'DIKIRIM', 'DITERIMA'],
+                    datasets: [{
+                        label: 'Persentase Transaksi Armada Usaha',
+                        data: [procesCount, sentCount, recovCount],
+                        backgroundColor: [
+                            'rgba(245, 158, 11, 0.2)', // Amber
+                            'rgba(59, 130, 246, 0.2)',  // Blue
+                            'rgba(16, 185, 129, 0.2)'  // Emerald
+                        ],
+                        borderColor: [
+                            '#f59e0b',
+                            '#3b82f6',
+                            '#10b981'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            grid: { color: gridColor },
+                            ticks: { color: labelColor, stepSize: 1 }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: labelColor }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateChartThemeColors() {
+            if (analyticsChartInstance) {
+                renderChartVisualizer();
+            }
+        }
+
+
+        // === UTILITY HELPERS ===
+        function formatIdr(num) {
+            return "Rp " + parseFloat(num).toLocaleString('id-ID', {minimumFractionDigits: 0});
+        }
+
+        function formatDateText(timestamp) {
+            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const date = new Date(timestamp);
+            const d = days[date.getDay()];
+            const dayNum = date.getDate().toString().padStart(2, '0');
+            const monthArr = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+            const mo = monthArr[date.getMonth()];
+            const yr = date.getFullYear();
+            const hr = date.getHours().toString().padStart(2, '0');
+            const min = date.getMinutes().toString().padStart(2, '0');
+            return `${d}, ${dayNum} ${mo} ${yr} ${hr}:${min}`;
+        }
+    </script>
+</body>
+</html>
